@@ -1,7 +1,7 @@
 import { MessageDisplay } from '@/components/common';
 import { ProductShowcaseGrid } from '@/components/product';
 import { useDocumentTitle, useRecommendedProducts, useScrollTop } from '@/hooks';
-import bannerImg from '@/images/banner-girl-1.png';
+import bannerImg from '@/images/productos-recomendados.jpg';
 import React from 'react';
 
 const RecommendedProducts = () => {
@@ -23,6 +23,7 @@ const RecommendedProducts = () => {
             <h1>Productos Recomendados</h1>
           </div>
           <div className="banner-img">
+            <img src={bannerImg} alt="banner" />
           </div>
         </div>
         <div className="display">
