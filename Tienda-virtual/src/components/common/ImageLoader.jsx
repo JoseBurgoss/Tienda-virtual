@@ -2,14 +2,33 @@ import { LoadingOutlined } from '@ant-design/icons';
 import PropType from 'prop-types';
 import React, { useState } from 'react';
 
-const ImageLoader = ({ src, alt, className }) => {
-  const loadedImages = {};
-  const [loaded, setLoaded] = useState(loadedImages[src]);
+const fallbackStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  height: '100%',
+  minHeight: '8rem',
+  padding: '1rem',
+  background: '#f2f2f2',
+  color: '#777',
+  fontSize: '0.85rem',
+  textAlign: 'center'
+};
 
-  const onLoad = () => {
-    loadedImages[src] = true;
-    setLoaded(true);
-  };
+const ImageLoader = ({ src, alt, className }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  // Si la imagen no se puede descargar (p. ej. 403 de Storage), mostrar un recuadro
+  // con el nombre en lugar de dejar el spinner girando para siempre.
+  if (failed) {
+    return (
+      <div className={className || ''} role="img" aria-label={alt || ''} style={fallbackStyle}>
+        {alt || ''}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -22,7 +41,8 @@ const ImageLoader = ({ src, alt, className }) => {
       <img
         alt={alt || ''}
         className={`${className || ''} ${loaded ? 'is-img-loaded' : 'is-img-loading'}`}
-        onLoad={onLoad}
+        onLoad={() => setLoaded(true)}
+        onError={() => setFailed(true)}
         src={src}
       />
     </>
