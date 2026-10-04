@@ -1,0 +1,9 @@
+Tienda Burgos
+Copyright 2025 José Andres Burgos Bolivar
+
+This product is a modified version of ecommerce-react
+(https://github.com/jgudo/ecommerce-react) by Julius Guevarra,
+licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Modifications by José Burgos: Spanish localization, own Firebase project,
+Vercel deployment, and a fallback for product images that fail to load.

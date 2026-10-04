@@ -82,6 +82,8 @@ Tienda-virtual/
 
 Based on the open-source [ecommerce-react](https://github.com/jgudo/ecommerce-react) project by Julius Guevarra, adapted, localized to Spanish and deployed on Vercel.
 
+Licensed under the Apache License 2.0, as the original project. See [LICENSE](LICENSE) and [NOTICE](NOTICE) for attribution and the list of changes.
+
 ## Español
 
 Tienda en línea hecha con React, Redux-Saga y Firebase. Incluye catálogo con búsqueda y filtros, carrito persistente, checkout en tres pasos, cuentas de usuario (correo, Google, Facebook, GitHub) y panel de administración para crear, editar y eliminar productos. Demo: https://tienda-virtual-pi-liart.vercel.app/ (las imágenes de productos vienen de Firebase Storage y pueden no mostrarse mientras se restablece el acceso).
