@@ -1,199 +1,91 @@
-https://tienda-virtual-pi-liart.vercel.app/
+# Tienda Virtual
 
-# TiendaVirtual / Virtual Store
+An e-commerce web store built with React, Redux-Saga and Firebase: product catalog with search and filters, persistent shopping basket, three-step checkout, user accounts and an admin panel for managing products.
 
-A modern e-commerce web application built with React and Firebase, featuring shopping cart functionality, user authentication, and real-time data synchronization.
+**Live demo:** https://tienda-virtual-pi-liart.vercel.app/
 
-Una aplicación web de comercio electrónico moderna construida con React y Firebase, con funcionalidad de carrito de compras, autenticación de usuarios y sincronización de datos en tiempo real.
+> Note: product images are served from Firebase Storage and may not display while Storage access is being restored. The rest of the store (catalog data, basket, auth, checkout flow) is unaffected, and products without an image show a labeled placeholder.
 
-## 🚀 Features / Características
+## Features
 
-### English
-- **Product Management**: Browse, search, and filter product catalog
-- **Shopping Cart**: Add, remove, and modify product quantities  
-- **User Authentication**: Firebase-based user registration and login
-- **Real-time Updates**: Live synchronization of cart and product data
-- **Responsive Design**: Mobile-friendly user interface
-- **State Persistence**: Cart contents preserved across browser sessions
-- **Payment Integration**: Credit card and PayPal payment options
-- **Image Management**: Product image upload and storage
+- **Catalog:** home page with featured and recommended products, shop page with paginated product grid, product detail page with size and color selection.
+- **Search and filters:** search by product name, filter by brand and price range (slider), sort by name or price.
+- **Basket:** add/remove items and change quantities; persisted with `redux-persist` and saved to the user's Firestore document.
+- **Checkout:** three steps (order summary, shipping details with phone input, payment). The credit card form validates input and confirms the order; PayPal is a placeholder. No real payment is processed.
+- **Authentication:** email/password sign-up and sign-in, Google, Facebook and GitHub sign-in, password reset (Firebase Auth).
+- **Account:** profile page and profile editing (name, email, address, phone, avatar and banner images).
+- **Admin panel:** routes restricted to users with role `ADMIN`; add, edit and delete products, including image upload to Firebase Storage.
+- Form validation with Formik + Yup, loading skeletons, responsive layout with mobile navigation.
 
-### Español
-- **Gestión de Productos**: Navegar, buscar y filtrar catálogo de productos
-- **Carrito de Compras**: Agregar, eliminar y modificar cantidades de productos
-- **Autenticación de Usuarios**: Registro e inicio de sesión basado en Firebase
-- **Actualizaciones en Tiempo Real**: Sincronización en vivo de carrito y datos de productos
-- **Diseño Responsivo**: Interfaz amigable para móviles
-- **Persistencia de Estado**: Contenido del carrito preservado entre sesiones
-- **Integración de Pagos**: Opciones de pago con tarjeta de crédito y PayPal
-- **Gestión de Imágenes**: Carga y almacenamiento de imágenes de productos
+## Tech stack
 
-## 🛠️ Technology Stack / Stack Tecnológico
+- React 17, React Router 5
+- Redux 4 + Redux-Saga, redux-persist
+- Firebase 8 (Authentication, Cloud Firestore, Storage)
+- Vite 3, Sass
+- Formik, Yup, react-select, react-compound-slider, react-phone-input-2, Ant Design icons
+- Jest + Enzyme (snapshot test)
+- Firebase Cloud Functions (`functions/`, optional: lowercases product names for search)
+- Deployed on Vercel (`vercel.json` SPA rewrite)
 
-| Technology | Version | Purpose / Propósito |
-|------------|---------|---------------------|
-| React | 17.0.2 | Frontend framework / Framework frontend |
-| Firebase | 8.4.3 | Backend services / Servicios backend |
-| Redux | 4.1.0 | State management / Gestión de estado |
-| Vite | 3.0.2 | Build tool / Herramienta de construcción |
-| Formik | 2.2.6 | Form handling / Manejo de formularios |
-| Ant Design | 4.6.2 | UI components / Componentes UI | [1](#0-0) 
+## Getting started
 
-## 📋 Prerequisites / Prerrequisitos
+The application lives in the `Tienda-virtual/` subfolder. Requirements: Node.js 16+ and a Firebase project with Authentication, Firestore and Storage enabled.
 
-### English
-- Node.js (version 14 or higher)
-- npm or yarn package manager
-- Firebase account and project setup
-
-### Español
-- Node.js (versión 14 o superior)
-- Gestor de paquetes npm o yarn
-- Cuenta de Firebase y configuración de proyecto
-
-## 🚀 Installation & Setup / Instalación y Configuración
-
-### English
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/JoseBurgoss/Tienda-virtual.git
-   cd Tienda-virtual
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Firebase**
-   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com)
-   - Enable Authentication, Firestore Database, and Storage
-   - Copy your Firebase config and create a `.env` file in the root directory
-   - Add your Firebase configuration variables
-
-4. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-6. **Preview production build**
-   ```bash
-   npm run serve
-   ```
-
-### Español
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/JoseBurgoss/Tienda-virtual.git
-   cd Tienda-virtual
-   ```
-
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Configurar Firebase**
-   - Crear un proyecto Firebase en [Firebase Console](https://console.firebase.google.com)
-   - Habilitar Authentication, Firestore Database y Storage
-   - Copiar tu configuración de Firebase y crear un archivo `.env` en el directorio raíz
-   - Agregar las variables de configuración de Firebase
-
-4. **Iniciar servidor de desarrollo**
-   ```bash
-   npm run dev
-   ```
-
-5. **Construir para producción**
-   ```bash
-   npm run build
-   ```
-
-6. **Previsualizar construcción de producción**
-   ```bash
-   npm run serve
-   ```
-
-## 📜 Available Scripts / Scripts Disponibles [2](#0-1) 
-
-### English
-- `npm run dev`: Starts Vite development server with hot reload
-- `npm run build`: Creates optimized production build with SPA fallback
-- `npm run serve`: Previews production build locally
-- `npm run test`: Runs Jest test suite with cross-environment support
-
-### Español
-- `npm run dev`: Inicia el servidor de desarrollo Vite con recarga en caliente
-- `npm run build`: Crea una construcción de producción optimizada con respaldo SPA
-- `npm run serve`: Previsualiza la construcción de producción localmente
-- `npm run test`: Ejecuta la suite de pruebas Jest con soporte multi-entorno
-
-## 🏗️ Project Structure / Estructura del Proyecto
-
+```bash
+git clone https://github.com/JoseBurgoss/Tienda-virtual.git
+cd Tienda-virtual/Tienda-virtual
+yarn install        # or: npm install
 ```
+
+Create `Tienda-virtual/.env` with the variables read in `src/services/config.js`:
+
+```env
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MSG_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+VITE_FIREBASE_MEASUREMENT_ID=
+```
+
+Scripts:
+
+```bash
+yarn dev      # Vite dev server on http://localhost:3000
+yarn build    # production build to dist/ (also copies index.html to 404.html)
+yarn serve    # preview the production build
+yarn test     # Jest
+```
+
+To use the admin panel, set `role: "ADMIN"` on your user document in the Firestore `users` collection. Security rules for Firestore and Storage are in `firestore.rules` and `storage.rules`.
+
+## Project structure
+
+```text
 Tienda-virtual/
 ├── src/
-│   ├── components/          # Reusable UI components / Componentes UI reutilizables
-│   │   └── common/         # Common components like SearchBar
-│   ├── views/              # Page components / Componentes de página
-│   │   ├── account/        # User account management
-│   │   ├── checkout/       # Checkout process
-│   │   └── error/          # Error pages
-│   ├── redux/              # State management / Gestión de estado
-│   ├── hooks/              # Custom React hooks
-│   ├── constants/          # App constants and routes
-│   └── firebase/           # Firebase configuration
-├── public/                 # Static assets / Recursos estáticos
-└── package.json           # Dependencies and scripts
+│   ├── components/   # basket, common (navigation, filters, search), formik inputs, product
+│   ├── views/        # home, shop, featured, recommended, search, view_product,
+│   │                 # auth, account, checkout (step1-3), admin
+│   ├── redux/        # actions, reducers, sagas, store
+│   ├── routers/      # AppRouter, AdminRoute, ClientRoute, PublicRoute
+│   ├── services/     # Firebase config and data-access class
+│   ├── hooks/        # useBasket, useProduct, useFeaturedProducts, ...
+│   └── styles/       # Sass partials
+├── functions/        # Firebase Cloud Functions
+└── test/             # Jest setup and snapshot test
 ```
 
-## 🔧 Key Features Implementation / Implementación de Características Clave
+## Credits
 
-### Search Functionality / Funcionalidad de Búsqueda
-The application includes a sophisticated search system with recent search history: [3](#0-2) 
+Based on the open-source [ecommerce-react](https://github.com/jgudo/ecommerce-react) project by Julius Guevarra, adapted, localized to Spanish and deployed on Vercel.
 
-### Payment Integration / Integración de Pagos
-Multiple payment methods are supported including credit cards and PayPal: [4](#0-3) 
+## Español
 
-### User Account Management / Gestión de Cuentas de Usuario
-Complete user profile management with form validation: [5](#0-4) 
+Tienda en línea hecha con React, Redux-Saga y Firebase. Incluye catálogo con búsqueda y filtros, carrito persistente, checkout en tres pasos, cuentas de usuario (correo, Google, Facebook, GitHub) y panel de administración para crear, editar y eliminar productos. Demo: https://tienda-virtual-pi-liart.vercel.app/ (las imágenes de productos vienen de Firebase Storage y pueden no mostrarse mientras se restablece el acceso).
 
-## 🌐 Deployment / Despliegue
+---
 
-### English
-The application is configured for deployment with Firebase Hosting. The build process automatically creates a SPA fallback by copying `index.html` to `404.html`.
-
-### Español
-La aplicación está configurada para despliegue con Firebase Hosting. El proceso de construcción automáticamente crea un respaldo SPA copiando `index.html` a `404.html`.
-
-## 📝 License / Licencia
-
-MIT License - see LICENSE file for details / Licencia MIT - ver archivo LICENSE para detalles
-
-## 👨‍💻 Author / Autor
-
-**Julius Guevarra** - Original Developer / Desarrollador Original [6](#0-5) 
-
-## 🤝 Contributing / Contribuir
-
-### English
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Español
-1. Hacer fork del repositorio
-2. Crear tu rama de característica (`git checkout -b feature/CaracteristicaIncreible`)
-3. Hacer commit de tus cambios (`git commit -m 'Agregar CaracteristicaIncreible'`)
-4. Push a la rama (`git push origin feature/CaracteristicaIncreible`)
-5. Abrir un Pull Request
-```
+Author: José Burgos — https://jose-burgos-portfolio.vercel.app · https://www.linkedin.com/in/jose-burgos-/
