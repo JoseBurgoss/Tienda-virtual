@@ -185,7 +185,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
   } = useFileHandler({ image: {}, imageCollection: product?.imageCollection || [] });
 
   const onSubmitForm = (form) => {
-    if (imageFile.image.file || product.imageUrl) {
+    if (imageFile.image.file || product.image || product.imageUrl) {
       onSubmit({
         ...form,
         quantity: 1,
@@ -193,7 +193,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
         // of name here instead in firebase functions
         name_lower: form.name.toLowerCase(),
         dateAdded: new Date().getTime(),
-        image: imageFile?.image?.file || product.imageUrl,
+        image: imageFile?.image?.file || product.image || product.imageUrl,
         imageCollection: imageFile.imageCollection
       });
     } else {
@@ -286,7 +286,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 &nbsp;
                 <div className="product-form-field">
                   <CustomCreatableSelect
-                    defaultValue={values.keywords.map((key) => ({ value: key, label: key }))}
+                    defaultValue={values.sizes.map((size) => ({ value: size, label: size }))}
                     name="sizes"
                     iid="sizes"
                     type="number"
