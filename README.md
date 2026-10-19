@@ -2,9 +2,16 @@
 
 An e-commerce web store built with React, Redux-Saga and Firebase: product catalog with search and filters, persistent shopping basket, three-step checkout, user accounts and an admin panel for managing products.
 
-**Live demo:** https://tienda-virtual-pi-liart.vercel.app/
+**Live demo:** https://tienda.burgo.dev (university project · front-end demo without backend)
 
-> Note: product images are served from Firebase Storage and may not display while Storage access is being restored. The rest of the store (catalog data, basket, auth, checkout flow) is unaffected, and products without an image show a labeled placeholder.
+## Demo sin backend
+
+The live demo runs without Firebase. At build time Vite swaps `src/services/firebase.js` for `src/services/firebase.demo.js`, an adapter with the same API that keeps auth, products, profiles and baskets in `localStorage`, seeded with fictitious products (`src/services/demo/seed.js`). No request leaves the browser and the Firebase SDK is not bundled.
+
+- Demo accounts: `admin@demo.local` / `demo1234` (role `ADMIN`, admin panel) and `cliente@demo.local` / `demo1234`. Sign-up works too; Google/Facebook/GitHub sign-in enter as the demo customer.
+- Uploaded images are stored as data URLs (max 1.5 MB each).
+- The banner at the bottom has a **Reiniciar demo** button that clears the demo data and reloads.
+- To build against the real Firebase project instead: `VITE_BACKEND=firebase` plus the `VITE_FIREBASE_*` variables (see `src/services/config.js`).
 
 ## Features
 
@@ -26,7 +33,7 @@ An e-commerce web store built with React, Redux-Saga and Firebase: product catal
 - Formik, Yup, react-select, react-compound-slider, react-phone-input-2, Ant Design icons
 - Jest + Enzyme (snapshot test)
 - Firebase Cloud Functions (`functions/`, optional: lowercases product names for search)
-- Deployed on Vercel (`vercel.json` SPA rewrite)
+- Deployed as static files behind Caddy (SPA fallback to `index.html`; `vercel.json` keeps the equivalent rewrite)
 
 ## Getting started
 
@@ -80,14 +87,14 @@ Tienda-virtual/
 
 ## Credits
 
-Based on the open-source [ecommerce-react](https://github.com/jgudo/ecommerce-react) project by Julius Guevarra, adapted, localized to Spanish and deployed on Vercel.
+Based on the open-source [ecommerce-react](https://github.com/jgudo/ecommerce-react) project by Julius Guevarra, adapted, localized to Spanish and published as a front-end demo.
 
 Licensed under the Apache License 2.0, as the original project. See [LICENSE](LICENSE) and [NOTICE](NOTICE) for attribution and the list of changes.
 
 ## Español
 
-Tienda en línea hecha con React, Redux-Saga y Firebase. Incluye catálogo con búsqueda y filtros, carrito persistente, checkout en tres pasos, cuentas de usuario (correo, Google, Facebook, GitHub) y panel de administración para crear, editar y eliminar productos. Demo: https://tienda-virtual-pi-liart.vercel.app/ (las imágenes de productos vienen de Firebase Storage y pueden no mostrarse mientras se restablece el acceso).
+Tienda en línea hecha con React, Redux-Saga y Firebase. Incluye catálogo con búsqueda y filtros, carrito persistente, checkout en tres pasos, cuentas de usuario (correo, Google, Facebook, GitHub) y panel de administración para crear, editar y eliminar productos. Demo: https://tienda.burgo.dev (proyecto universitario; demo sin backend: los datos ficticios viven en el navegador, con cuentas `admin@demo.local` / `demo1234` y `cliente@demo.local` / `demo1234`).
 
 ---
 
-Author: José Burgos — https://jose-burgos-portfolio.vercel.app · https://www.linkedin.com/in/jose-burgos-/
+Author: José Burgos — https://jose.burgo.dev · https://www.linkedin.com/in/jose-burgos-/
