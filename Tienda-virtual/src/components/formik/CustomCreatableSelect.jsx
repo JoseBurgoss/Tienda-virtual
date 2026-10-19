@@ -24,7 +24,8 @@ const CustomCreatableSelect = (props) => {
   const handleKeyDown = (e) => {
     if (type === 'number') {
       const { key } = e.nativeEvent;
-      if (/\D/.test(key) && key !== 'Backspace') {
+      // Bloquea solo caracteres no numéricos; deja pasar Enter, Tab, flechas, etc.
+      if (key.length === 1 && /\D/.test(key)) {
         e.preventDefault();
       }
     }
