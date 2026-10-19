@@ -1,6 +1,16 @@
 // 
 // BASE STYLING ---------
 //
+
+// Tajawal servida desde el propio sitio (antes vía webfontloader + Google Fonts).
+// Licencia: SIL Open Font License 1.1.
+@font-face {
+  font-family: 'Tajawal';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/tajawal-latin-400.woff2') format('woff2');
+}
 * {
   box-sizing: border-box;
 }
